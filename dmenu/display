@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+source ~/.scripts/dmenu/config
+
+CHOSEN=$(echo -e "$(autorandr --detected)\ncustom" | eval ${DMENU})
+
+if [ "$CHOSEN" = "custom" ]
+then
+    arandr
+else
+    autorandr -c ${CHOSEN}
+fi

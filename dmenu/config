@@ -1,0 +1,1 @@
+DMENU="dmenu -i -nb '#1f1147' -nf '#ff2afc' -sb '#ff2afc' -sf '#1f1147' -fn 'NotoMonoRegular:pixelsize=25'"
