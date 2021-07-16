@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+ID=$(xinput | grep -Po "Touchpad.*id=\K[0-9]*")
+
+STATUS=$(xinput list-props "${ID}" | grep -Po "Device Enabled.*\K[0-9]")
+
+if [ "$STATUS" = "1" ]
+then
+      echo $STATUS
+      xinput disable $ID
+  else
+      echo $STATUS
+      xinput enable $ID
+fi
