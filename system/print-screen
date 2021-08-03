@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+function crop () {
+    scrot -s ${name};
+    xclip -selection clipboard -t image/png ${name};
+}
+
+function window () {
+    scrot -u ${name};
+    xclip -selection clipboard -t image/png ${name};
+}
+
+function all () {
+    scrot  ${name};
+    xclip -selection clipboard -t image/png ${name};
+    
+}
+
+name=~/Pictures/Screenshots/$(date '+%d-%m-%Y_%H:%M:%S').png;
+case "$1" in
+    -c)
+	crop 
+	;;
+    -w)
+	window 
+	;;
+    -a)
+    all
+esac
