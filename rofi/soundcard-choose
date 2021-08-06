@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+function choose-output(){
+CHOSEN=$(pactl list sinks | grep -Po "Description: \K.*" | rofi -dmenu -p "Input Source")
+NAME=$(pactl list sinks | grep "${CHOSEN}" -C 1 | grep -Po "Name: \K.*")
+pactl set-default-sink ${NAME}
+}
+
+function choose-input(){
+CHOSEN=$(pactl list sources | grep -Po "Description: \K.*" | rofi -dmenu -p "Input Source")
+NAME=$(pactl list sources | grep "${CHOSEN}" -C 1 | grep -Po "Name: \K.*")
+pactl set-default-source ${NAME}
+}
+
+OPTION=$(echo "input\noutput" |rofi -dmenu -p "Choose")
+if [ "${OPTION}" = "input" ]; then
+    choose-input
+elif [ "${OPTION}" = "output" ]; then
+    choose-output
+fi
+

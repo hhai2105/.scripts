@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+
+CHOSEN=$(echo -e "$(autorandr --detected)\ncustom" | rofi -dmenu -p "Display")
+
+if [ "$CHOSEN" = "custom" ]
+then
+    arandr
+else
+    autorandr -c ${CHOSEN}
+fi

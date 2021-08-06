@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+source ~/.scripts/dmenu/config
+
+CHOSEN=$(echo -e "$(ls ~/.scripts/system/)" | rofi -dmenu -p "Scripts")
+
+ ~/.scripts/system/$CHOSEN
