@@ -29,9 +29,8 @@ xsetroot -cursor_name left_ptr &
 run nitrogen --restore &
 run optimus-manager-qt &
 # run audio-fix &
-run nm-applet &
 run xfce4-power-manager &
 run ibus-daemon -d &
 run emacs --daemon &
 run numlockx on &
-run blueberry-tray &
+run blueman-applet &
