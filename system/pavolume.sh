@@ -163,6 +163,7 @@ case "$1" in
         volDown
         ;;
     --togmute)
+	
         volMuteStatus
         if [ "$curStatus" = 'yes' ]
         then
