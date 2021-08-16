@@ -14,7 +14,6 @@ function window () {
 function all () {
     scrot  ${name};
     xclip -selection clipboard -t image/png ${name};
-    
 }
 
 name=~/Pictures/Screenshots/$(date '+%d-%m-%Y_%H:%M:%S').png;
