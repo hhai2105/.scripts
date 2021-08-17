@@ -1,0 +1,40 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+# A wifi choosing script using nmcli
+connect(){
+    nmcli radio wifi on;
+    nmcli dev wifi rescan;
+    #sed "s/ *$//g" in order to remove the ending spaces produced by nmcli
+    CHOSEN=$(nmcli -f SSID dev wifi list | tail -n +2 |sed "s/ *$//g" | rofi -dmenu -i -p "Choose Wifi");
+    if nmcli dev wifi connect $CHOSEN | grep "Error";
+    then
+	PASSWORD=$(rofi -dmenu -p "Password");
+	while nmcli dev wifi connect $CHOSEN password $PASSWORD | grep "Error";
+	do
+	    PASSWORD=$(rofi -dmenu -p "Password");
+	done
+    fi
+}
+forget(){
+    CHOSEN=$(nmcli -f NAME con | tail -n +2 | sed "s/ *$//g" | rofi -dmenu -i -p "Choose Wifi")
+    nmcli connection delete id $CHOSEN
+}
+turnoff(){
+    nmcli radio wifi off
+}
+OPTION=$(echo "connect\nforget\nturn off"|rofi -dmenu -i -p "Options")
+case "$OPTION" in
+    connect)
+	connect
+	;;
+    forget)
+	forget
+	;;
+    turnoff)
+	turnoff
+	;;
+esac
+
+
+
