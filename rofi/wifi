@@ -7,14 +7,17 @@ connect(){
     nmcli dev wifi rescan;
     #sed "s/ *$//g" in order to remove the ending spaces produced by nmcli
     CHOSEN=$(nmcli -f SSID dev wifi list | tail -n +2 |sed "s/ *$//g" | rofi -dmenu -i -p "Choose Wifi");
-    if nmcli dev wifi connect $CHOSEN | grep "Error";
-    then
-	PASSWORD=$(rofi -dmenu -p "Password");
-	while nmcli dev wifi connect $CHOSEN password $PASSWORD | grep "Error";
-	do
+    RESULT=$(nmcli dev wifi connect $CHOSEN)
+    while echo "$RESULT" | grep "Error";
+    do 
+	if echo "$RESULT" | grep "Secrets";
+	then
 	    PASSWORD=$(rofi -dmenu -p "Password");
-	done
-    fi
+	    RESULT=$(nmcli dev wifi connect $CHOSEN password $PASSWORD | grep "Error.*Secrets" ;) 
+	else
+	    echo "$RESULT" | rofi -dmenu
+	fi
+    done
 }
 forget(){
     CHOSEN=$(nmcli -f NAME con | tail -n +2 | sed "s/ *$//g" | rofi -dmenu -i -p "Choose Wifi")
