@@ -26,7 +26,14 @@ forget(){
 turnoff(){
     nmcli radio wifi off
 }
-OPTION=$(echo "connect\nforget\nturn off"|rofi -dmenu -i -p "Options")
+
+if nmcli con show | grep "wlan0";
+then
+    CONNECTED=$(nmcli con show | grep " wlan0" | awk '{print $1}');
+    OPTION=$(echo "current: ${CONNECTED}\nconnect\nforget\nturn off"|rofi -dmenu -i -p "Options");
+else
+    OPTION=$(echo "connect\nforget\nturn off"|rofi -dmenu -i -p "Options");
+fi
 case "$OPTION" in
     connect)
 	connect
@@ -34,10 +41,7 @@ case "$OPTION" in
     forget)
 	forget
 	;;
-    turnoff)
+    "turn off")
 	turnoff
 	;;
 esac
-
-
-
