@@ -34,3 +34,4 @@ run ibus-daemon -d &
 run emacs --daemon &
 run numlockx on &
 run blueman-applet &
+run syncthing -no-browser&
