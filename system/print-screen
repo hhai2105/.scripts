@@ -16,7 +16,7 @@ function all () {
     xclip -selection clipboard -t image/png ${name};
 }
 
-name=~/Pictures/Screenshots/$(date '+%d-%m-%Y_%H:%M:%S').png;
+name=~/Pictures/Screenshots/$(date '+%m-%d-%Y_%H-%M-%S').png;
 case "$1" in
     -c)
 	crop 
