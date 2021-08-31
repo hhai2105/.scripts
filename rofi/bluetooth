@@ -1,0 +1,98 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+#---------------Main Settings-----------------------------
+togglePower(){
+    if bluetoothctl show | grep "Powered: yes";
+    then
+	bluetoothctl power off;
+    else
+	bluetoothctl power on;
+    fi
+    mainMenu;
+}
+
+togglePairable(){
+    if bluetoothhctl show | grep "Pairable: yes"
+    then
+	bluetoothctl pairable off;
+    else
+	bluetoothctl pairable on;
+    fi
+    mainMenu;
+}
+
+toggleDiscovering(){
+    echo "discovering"
+    if bluetoothctl show | grep "Discovering: yes"
+    then
+	killall bluetoothctl;
+	sleep .1;
+    else
+	bluetoothctl scan on &
+	sleep .1;
+    fi
+    mainMenu;
+}
+
+toggleDiscoverable(){
+    if bluetoothctl show | grep "Discoverable: yes"
+    then
+	bluetoothctl discoverable off
+    else
+	bluetoothctl discoverable on
+    fi
+    mainMenu;
+}
+
+#---------------Device Settings-----------------------------
+
+togglePair(){
+    
+}
+
+toggleTrust(){
+    
+}
+
+toggleConnect(){
+    
+}
+
+toggleBlock(){
+    
+}
+
+toggleLegacyPairing(){
+    
+}
+
+
+mainMenu(){
+    if bluetoothctl show | grep "Powered: no";
+    then
+	STATUS=$(bluetoothctl show | grep 'Powered:' | sed 's/^[ \t]*//g');
+    else
+	STATUS="$(bluetoothctl devices | cut -d' ' -f3-)\n----------------\n$(bluetoothctl show | grep -E '(Powered:|Discoverable:|Pairable:|Discovering:)' | sed 's/^[ \t]*//g')";
+    fi
+    CHOICE=$(echo "$STATUS" | rofi -dmenu -i -p "Options")
+    if echo "${CHOICE}" | grep "Pairable:";
+    then
+	togglePairable;
+    elif echo "${CHOICE}" | grep "Powered:";
+    then
+	togglePower;
+    elif echo "${CHOICE}" | grep "Discoverable:";
+    then
+	toggleDiscoverable;
+    elif echo "${CHOICE}" | grep "Discovering:";
+    then
+	toggleDiscovering;
+    else
+	echo "${CHOICE}"
+	MACADDR=$(bluetoothctl devices | grep "${CHOICE}" | awk '{print $2}');
+	echo "${MACADDR}"
+	bluetoothctl info ${MACADDR} | grep -E "(Paired:|Trusted:|Blocked:|Connected:|LegacyPairing:)" | rofi -dmenu -p "${CHOICE}"
+    fi
+}
+mainMenu;
