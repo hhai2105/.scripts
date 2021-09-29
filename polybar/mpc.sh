@@ -3,12 +3,10 @@ set -euo pipefail
 
 #--------variables--------
 format="%artist% - %title%"
-songName="$(mpc -f "${format}" | head -n 1)"
 songName_foreground="#ff2afc"
 bar_progress_width=20
-bar_progress_fill="-"
-bar_progress_fill_foreground="#42c6ff"
-bar_progress_indicator="-"
+bar_progress_fill="-" bar_progress_fill_foreground="#42c6ff"
+bar_progress_indicator="|"
 bar_progress_indicator_foreground="#ff2afc"
 bar_progress_empty="-"
 bar_progress_empty_foreground="#A875FF"
@@ -16,7 +14,7 @@ bar_progress_empty_foreground="#A875FF"
 bar_volume_width=20
 bar_volume_fill="-"
 bar_volume_fill_foreground="#42c6ff"
-bar_volume_indicator="-"
+bar_volume_indicator="|"
 bar_volume_indicator_foreground="#ff2afc"
 bar_volume_empty="-"
 bar_volume_empty_foreground="#A875FF"
@@ -24,7 +22,7 @@ bar_volume_empty_foreground="#A875FF"
 volume_step=2
 
 getSong(){
-    songName="%{F$songName_foreground}$(mpc -f "${format}" | head -n 1)%{F-}"
+    songName="%{F$songName_foreground}$(mpc -f "${format}" current)"
 }
 
 getVolume(){
@@ -105,7 +103,7 @@ volumeDown(){
 }
 
 print(){
-    if mpc | grep "volume: n/a";
+    if [ "$(mpc | wc -l)" = 1 ];
     then
 	echo ""
     else;
