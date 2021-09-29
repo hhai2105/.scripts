@@ -1,0 +1,3 @@
+[submodule "rofi/rofi-search"]
+	path = rofi/rofi-search
+	url = git@github.com:hhai2105/rofi-search

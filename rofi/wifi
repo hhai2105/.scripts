@@ -6,7 +6,12 @@ connect(){
     nmcli radio wifi on;
     nmcli dev wifi rescan;
     #sed "s/ *$//g" in order to remove the ending spaces produced by nmcli
-    CHOSEN=$(nmcli -f SSID dev wifi list | tail -n +2 |sed "s/ *$//g" | rofi -dmenu -i -p "Choose Wifi");
+    CHOSEN="refresh"
+    while [ $CHOSEN = "refresh" ]
+    do
+    LIST=$(nmcli -f SSID dev wifi list | tail -n +2 | sed "s/ *$//g")
+    CHOSEN=$(echo "$LIST\nrefresh"| rofi -dmenu -i -p "Choose Wifi");
+    done
     RESULT=$(nmcli dev wifi connect $CHOSEN)
     while echo "$RESULT" | grep "Error";
     do 
