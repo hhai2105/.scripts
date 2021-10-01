@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+# a simple screen changing script for the wacom tablet
+# uses digimend-kernel-drivers-dkms
+OPTIONS=$(echo "$(xrandr | tail -n +2 | grep -Pv '^ ' | awk '{print $1}')" | rofi -dmenu -p "Screen")
+VALUE=$(xrandr | grep "$OPTIONS" | awk '{print $3}')
+TABLETID=$(xsetwacom --list devices | grep -Po "stylus.*id: \K[0-9]*")
+xsetwacom --set "$TABLETID" MapToOutput $VALUE
+
