@@ -40,7 +40,7 @@ getBarElapsed(){
     i="1"
     while [ $i -lt $numElapsed ]
     do
-	barElapsed+="$bar_progress_fill";
+	barElapsed+="${bar_progress_fill}";
 	i=$[$i + 1]
     done
     barElapsed+="%{F-}"
@@ -49,7 +49,7 @@ getBarElapsed(){
     barElapsed+="%{F-}"
     barElapsed+="%{F${bar_progress_empty_foreground}}"
     i="1"
-    while [ $i -lt $((bar_progress_width - numElapsed)) ]
+    while [ $i -le $((bar_progress_width - numElapsed)) ]
     do
 	barElapsed+="${bar_progress_empty}";
 	i=$[$i + 1]
@@ -72,7 +72,7 @@ getBarVolume(){
     barVolume+="%{F-}"
     barVolume+="%{F${bar_progress_empty_foreground}}"
     i="1"
-    while [ $i -lt $((bar_volume_width - numVolume)) ]
+    while [ $i -le $((bar_volume_width - numVolume)) ]
     do
 	barVolume+="${bar_volume_empty}";
 	i=$[ $i + 1 ]
@@ -116,6 +116,7 @@ print(){
 
 
 
+
 case $1 in
     print)
 	print;
@@ -139,6 +140,5 @@ case $1 in
 	;;
     prev)
 	mpc prev;
-	
 	;;
 esac
