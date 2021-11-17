@@ -2,27 +2,28 @@
 set -euo pipefail
 
 function crop () {
-    scrot -sf ${name};
-    xclip -selection clipboard -t image/png ${name};
+    scrot -s -f ${NAME};
+    xclip -selection clipboard -t image/png ${NAME};
 }
 
 function window () {
-    scrot -uf ${name};
-    xclip -selection clipboard -t image/png ${name};
+    scrot -u -f ${NAME};
+    xclip -selection clipboard -t image/png ${NAME};
 }
 
 function all () {
-    scrot -f  ${name};
-    xclip -selection clipboard -t image/png ${name};
+	echo $NAME
+    scrot -f ${NAME};
+    xclip -selection clipboard -t image/png ${NAME};
 }
 
-name=~/Pictures/Screenshots/$(date '+%m-%d-%Y_%H-%M-%S').png;
+NAME=~/Pictures/Screenshots/$(date '+%m-%d-%Y_%H-%M-%S').png;
 case "$1" in
     -c)
-	crop 
+	crop
 	;;
     -w)
-	window 
+	window
 	;;
     -a)
     all
