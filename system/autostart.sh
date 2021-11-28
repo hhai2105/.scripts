@@ -1,7 +1,6 @@
 #!/usr/bin/zsh
 
 function run {
-
     if ! pgrep $1 ;
   then
     $@&
@@ -20,7 +19,7 @@ function run {
 brightnessctl --device='asus::kbd_backlight' set 0;
 autorandr -c;
 run picom;
-run $HOME/.config/polybar/launch.sh;
+#run $HOME/.config/polybar/launch.sh;
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 #change your keyboard if you need it
@@ -28,7 +27,6 @@ run $HOME/.config/polybar/launch.sh;
 
 #cursor active at boot
 xsetroot -cursor_name left_ptr &
-run nitrogen --restore &
 run optimus-manager-qt &
 # run audio-fix &
 run xfce4-power-manager &
@@ -36,4 +34,6 @@ run ibus-daemon -d &
 run emacs --daemon &
 run numlockx on &
 run syncthing -no-browser&
-run mpDris2 & 
+run mpDris2 &
+run mpd &
+nitrogen --restore
