@@ -3,11 +3,23 @@
 set -euo pipefail
 
 
-CHOSEN=$(echo -e "$(autorandr --detected)\ncustom" | rofi -dmenu -p "Display")
+CHOSEN=$(echo -e "$(autorandr --detected)\ncustom\nsave current" | rofi -dmenu -p "Display")
 
 if [ "$CHOSEN" = "custom" ]
 then
     arandr
+elif [ "$CHOSEN" = "save current" ]
+then
+    CONFIRMATION="yes"
+    NAME=$(rofi -dmenu -p "name")
+    if autorandr | grep "$NAME"
+    then
+	CONFIRMATION=$(echo "yes\nno" | rofi -dmenu -p "are you sure?")
+    fi
+    if [ "$CONFIRMATION" = "yes" ]
+    then
+	autorandr --save $NAME --force
+    fi
 else
     autorandr -c ${CHOSEN}
 fi
