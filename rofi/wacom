@@ -2,10 +2,11 @@
 set -euo pipefail
 
 # a simple screen changing script for the wacom tablet
-# uses digimend-kernel-drivers-dkms
 OPTIONS=$(echo "$(xrandr | tail -n +2 | grep -Pv '^ ' | awk '{print $1}')" | rofi -dmenu -p "Screen")
-VALUE=$(xrandr | grep "$OPTIONS" | grep -Po "[0-9]*x[0-9]*\+[0-9]*\+[0-9]*")
-echo $VALUE
-TABLETID=$(xsetwacom --list devices | grep -Po "stylus.*id: \K[0-9]*")
-xsetwacom --set "$TABLETID" MapToOutput $VALUE
+PEN=$(xinput list --name-only |grep "Pen")
+PEN=$(xinput list --id-only "$PEN")
+PAD=$(xinput list --name-only |grep "Pad")
+PAD=$(xinput list --id-only "$PAD")
+xinput map-to-output $PEN $OPTIONS
+xinput map-to-output $PAD $OPTIONS
 
