@@ -3,7 +3,7 @@ set -euo pipefail
 
 # a simple screen changing script for the wacom tablet
 OPTIONS=$(echo "$(xrandr | tail -n +2 | grep -Pv '^ ' | awk '{print $1}')" | rofi -dmenu -p "Screen")
-PEN=$(xinput list --name-only |grep "Pen")
+PEN=$(xinput list --name-only |grep "Pen\|stylus")
 PEN=$(xinput list --id-only "$PEN")
 PAD=$(xinput list --name-only |grep "Pad")
 PAD=$(xinput list --id-only "$PAD")
