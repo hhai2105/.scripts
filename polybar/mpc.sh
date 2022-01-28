@@ -4,14 +4,14 @@ set -euo pipefail
 #--------variables--------
 format="%artist% - %title%"
 songName_foreground="#ff2afc"
-bar_progress_width=20
+bar_progress_width=10
 bar_progress_fill="-" bar_progress_fill_foreground="#42c6ff"
 bar_progress_indicator="|"
 bar_progress_indicator_foreground="#ff2afc"
 bar_progress_empty="-"
 bar_progress_empty_foreground="#A875FF"
 
-bar_volume_width=20
+bar_volume_width=10
 bar_volume_fill="-"
 bar_volume_fill_foreground="#42c6ff"
 bar_volume_indicator="|"
@@ -120,23 +120,18 @@ print(){
 case $1 in
     print)
 	print;
-	
 	;;
     volUp)
 	volumeUp;
-	
 	;;
     volDown)
 	volumeDown;
-	
 	;;
     toggle)
 	mpc toggle;
-	
 	;;
     next)
 	mpc next;
-	
 	;;
     prev)
 	mpc prev;
