@@ -1,0 +1,23 @@
+#+title: rofi-search
+#+author: Hai Nguyen
+
+* Summary
+A Search Engine Based on the Qutebrowser with both quickmarks and search engine support. 
+[[./pictures/default.gif]]
+
+* Feature
+** Quickmark
+[[./pictures/quickmark.gif]]
+You can assign quickmark for website that you go to often with a short string
+
+*** Example config file in ~/.config/rofi-search/quickmark
+[[./pictures/quickmark.png]]
+** Search engine
+you can assign a search engine to a short string and type your query afterwards.
+
+*** Example config file in ~/.config/rofi-search/searchengine
+add more searchengine within .config/rofi-search/searchengine
+[[./pictures/searchengine.png]]
+
+** Customize browser
+You can set the script's parameter to your preferred browser.

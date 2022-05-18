@@ -1,0 +1,22 @@
+#+title: rofi-youtube
+#+author: Hai Nguyen
+
+* Summary 
+A rofi-script to watch youtube using MPV
+[[./pictures/2021-10-20 16-03-33.gif]]
+
+* Requirements
+** rofi
+https://github.com/davatorium/rofi
+** Nodejs
+*** axios module
+#+begin_src python
+npm install axios
+#+end_src
+
+** mpv
+** yt-dlp
+* Usage
+A search engine for youtube using rofi.
+This scripts call the youtube api to return your result, and then play the video using mpv and yt-dlp
+
