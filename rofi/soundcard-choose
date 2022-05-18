@@ -2,21 +2,28 @@
 set -euo pipefail
 
 function choose-output(){
-CHOSEN=$(pactl list sinks | grep -Po "Description: \K.*" | rofi -dmenu -i -p "Input Source")
-NAME=$(pactl list sinks | grep "${CHOSEN}" -C 1 | grep -Po "Name: \K.*")
-pactl set-default-sink ${NAME}
+    CHOSEN=$(pactl list sinks | grep -Po "Description: \K.*" | rofi -dmenu -i -p "Input Source")
+    NAME=$(pactl list sinks | grep "${CHOSEN}" -C 1 | grep -Po "Name: \K.*")
+    pactl set-default-sink ${NAME}
 }
 
 function choose-input(){
-CHOSEN=$(pactl list sources | grep -Po "Description: \K.*" | rofi -dmenu -i -p "Input Source")
-NAME=$(pactl list sources | grep "${CHOSEN}" -C 1 | grep -Po "Name: \K.*")
-pactl set-default-source ${NAME}
+    CHOSEN=$(pactl list sources | grep -Po "Description: \K.*" | rofi -dmenu -i -p "Input Source")
+    NAME=$(pactl list sources | grep "${CHOSEN}" -C 1 | grep -Po "Name: \K.*")
+    pactl set-default-source ${NAME}
 }
 
-OPTION=$(echo "input\noutput" |rofi -dmenu -i -p "Choose")
+function choose-profile(){
+    CHOSEN=$(pactl list cards | grep -Po 'alsa.card_name = "\K.*'| sed 's/.$//g' | rofi -dmenu -i -p "Card Name")
+    CARD = $(pactl list cards | grep '${CHOSEN}')
+}
+
+OPTION=$(echo "input\noutput\nprofiles" |rofi -dmenu -i -p "Choose")
 if [ "${OPTION}" = "input" ]; then
     choose-input
 elif [ "${OPTION}" = "output" ]; then
     choose-output
+elif [ "${OPTION}" = "profiles" ]; then
+    choose-profile
 fi
 

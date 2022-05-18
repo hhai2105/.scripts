@@ -5,4 +5,4 @@ source ~/.scripts/dmenu/config
 
 CHOSEN=$(echo -e "$(ls ~/.scripts/system/)" | rofi -dmenu -p "Scripts")
 
- ~/.scripts/system/$CHOSEN
+~/.scripts/system/$CHOSEN

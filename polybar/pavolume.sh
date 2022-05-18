@@ -13,7 +13,9 @@ autosync='no'
 # no : not muted
 curStatus="no"
 active_sink=""
-limit=$((100 - inc)) maxlimit=$((maxvol - inc))
+limit=$((100 - inc))
+maxlimit=$((maxvol - inc))
+
 reloadSink() {
     active_sink=$(pacmd list-sinks | awk '/* index:/{print $3}')
 }
@@ -190,3 +192,4 @@ case "$1" in
         output
         ;;
 esac
+
