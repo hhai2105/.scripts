@@ -86,6 +86,7 @@ mainMenu(){
     ACTIONS="add\ndelete\nclear"
     OPTIONS="$(mpc status | grep -Po "volume: *[0-9]*%")\n$(mpc status | grep -Po "repeat: [a-z]*")\n$(mpc status | grep -Po "random: [a-z]*")\n$(mpc status | grep -Po "single: [a-z]*")\n$(mpc status | grep -Po "consume: [a-z]*")"
     CHOICE="$(echo "$CURRENT\n--------------------------\n$OPTIONS\n--------------------------\n$ACTIONS" | rofi -dmenu -p "mpc")"
+    echo $CHOICE
     if [ "$CHOICE" = "$CURRENT" ];
     then
 	mpc toggle;
