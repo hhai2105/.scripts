@@ -25,9 +25,16 @@ add(){
     add;
 }
 
+playlist(){
+    SONG=$(mpc playlist -f "%position% %artist%-%title%" | rofi -dmenu -i -p "Songs")
+    INDEX=$(echo $SONG | cut -d " " -f1)
+    mpc play $INDEX;
+    playlist
+}
+
 delete(){
-    SONG=$(mpc playlist -f "%position% %artist%-%title%" | rofi -dmenu -p "Songs")
-	INDEX=$(echo $SONG | cut -d " " -f1)
+    SONG=$(mpc playlist -f "%position% %artist%-%title%" | rofi -dmenu -i -p "Songs")
+    INDEX=$(echo $SONG | cut -d " " -f1)
     mpc del $INDEX;
     delete;
 }
@@ -83,7 +90,7 @@ volume(){
 }
 mainMenu(){
     CURRENT="$(mpc current -f '%album% - %title%')"
-    ACTIONS="add\ndelete\nclear"
+    ACTIONS="playlist\nadd\ndelete\nclear"
     OPTIONS="$(mpc status | grep -Po "volume: *[0-9]*%")\n$(mpc status | grep -Po "repeat: [a-z]*")\n$(mpc status | grep -Po "random: [a-z]*")\n$(mpc status | grep -Po "single: [a-z]*")\n$(mpc status | grep -Po "consume: [a-z]*")"
     CHOICE="$(echo "$CURRENT\n--------------------------\n$OPTIONS\n--------------------------\n$ACTIONS" | rofi -dmenu -p "mpc")"
     echo $CHOICE
@@ -112,6 +119,9 @@ mainMenu(){
     elif echo "$CHOICE" | grep "^add$";
     then
 	add;
+    elif echo "$CHOICE" | grep "^playlist$";
+    then
+	playlist;
     elif echo "$CHOICE" | grep "^delete$";
     then
 	delete;
