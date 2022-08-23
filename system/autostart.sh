@@ -40,3 +40,5 @@ run mpd &
 run blueman-applet &
 run /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run brightnessctl --device='asus::kbd_backlight' set 0 &
+run udiskie &
+
