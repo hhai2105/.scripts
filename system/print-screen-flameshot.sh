@@ -1,3 +1,4 @@
+
 #!/usr/bin/env zsh
 set -euo pipefail
 
@@ -17,7 +18,7 @@ function all () {
 }
 
 function monitor () {
-    scrot -f ${NAME};
+    flameshot screen
     xclip -selection clipboard -t image/png ${NAME};
 }
 

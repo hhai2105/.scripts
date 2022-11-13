@@ -21,14 +21,12 @@ optimus-manager-qt &
 #xrandr --output DP2 --primary --mode 1920x1080 --rate 60.00 --output LVDS1 --off &
 #xrandr --output LVDS1 --mode 1366x768 --output DP3 --mode 1920x1080 --right-of LVDS1
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-run $HOME/.config/polybar/launch.sh;
 
 #change your keyboard if you need it
 #setxkbmap -layout be
 
 #cursor active at boot
 #run picom &
-run nitrogen --restore &
 run syncthing --no-browser &
 run xsetroot -cursor_name left_ptr &
 run optimus-manager-qt &
@@ -42,4 +40,7 @@ run blueman-applet &
 run /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run brightnessctl --device='asus::kbd_backlight' set 0 &
 run udiskie &
+run ./l5p_kbl.py static bae1ff baffc9 ffffba ffdfba  --brightness 2 &
+$HOME/.config/polybar/launch.sh
+nitrogen --restore
 
