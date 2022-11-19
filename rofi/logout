@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-OPTION="screen off\nlogout\nshut down\nhibernate"
+OPTION="screen off\nlogout\nshut down\nsuspend\nhibernate"
 
 VALUE="$(echo $OPTION | rofi -dmenu -p "Options")"
 
@@ -15,8 +15,11 @@ case $VALUE in
 	"shut down")
 		sudo shutdown now
 		;;
-	"hibernate")
+	"suspend")
 		sudo systemctl suspend
+		;;
+	"hibernate")
+		sudo systemctl hiberante
 		;;
 esac
 

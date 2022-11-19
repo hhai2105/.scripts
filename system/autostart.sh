@@ -38,9 +38,10 @@ run mpDris2 &
 run mpd &
 run blueman-applet &
 run /usr/lib/xfce4/notifyd/xfce4-notifyd &
-run brightnessctl --device='asus::kbd_backlight' set 0 &
 run udiskie &
-run ./l5p_kbl.py static bae1ff baffc9 ffffba ffdfba  --brightness 2 &
+run picom -b &
+run sudo battery-stats-collector &
+run $HOME/.scripts/system/l5p_kbl.py static ff0000 00ff00 0000ff ffffff --brightness 2 &
 $HOME/.config/polybar/launch.sh
 nitrogen --restore
 
