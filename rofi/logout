@@ -19,7 +19,7 @@ case $VALUE in
 		sudo systemctl suspend
 		;;
 	"hibernate")
-		sudo systemctl hiberante
+		sudo systemctl hibernate
 		;;
 esac
 

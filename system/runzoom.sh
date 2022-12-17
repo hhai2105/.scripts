@@ -1,1 +1,0 @@
-#!/usr/binv/env zsh

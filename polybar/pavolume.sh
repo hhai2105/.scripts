@@ -52,6 +52,7 @@ function volUp {
     then
         volSync
     fi
+	volnoti-show $curVol / $maxvol
 }
 
 function volDown {

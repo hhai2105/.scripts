@@ -42,6 +42,8 @@ run udiskie &
 run picom -b &
 run sudo battery-stats-collector &
 run $HOME/.scripts/system/l5p_kbl.py static ff0000 00ff00 0000ff ffffff --brightness 2 &
+run blueberry-tray &
+run openrazer-daemon &
 $HOME/.config/polybar/launch.sh
 nitrogen --restore
 
