@@ -27,6 +27,7 @@ optimus-manager-qt &
 
 #cursor active at boot
 #run picom &
+run imwheel &
 run syncthing --no-browser &
 run xsetroot -cursor_name left_ptr &
 run optimus-manager-qt &
