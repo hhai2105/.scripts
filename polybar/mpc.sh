@@ -22,7 +22,8 @@ bar_volume_empty_foreground="#A875FF"
 volume_step=2
 
 getSong(){
-    songName="%{F$songName_foreground}$(mpc -f "${format}" current)"
+
+    songName="%{F$songName_foreground}$(mpc -f "${format}" current | zscroll)"
 }
 
 getVolume(){
