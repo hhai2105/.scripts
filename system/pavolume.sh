@@ -5,7 +5,7 @@
 osd='no'
 inc='1'
 capvol='no'
-maxvol='200'
+maxvol='100'
 autosync='no'
 
 # Muted status
@@ -50,6 +50,8 @@ function volUp {
     then
         volSync
     fi
+
+	dunstify -a "volume" "volume" "${curVol}" -r 991851 -h int:value:$curVol -t 1000
 }
 
 function volDown {
@@ -66,6 +68,7 @@ function volDown {
     then
         volSync
     fi
+	dunstify -a "volume" "volume" "${curVol}" -r 991851 -h int:value:$curVol -t 1000
 
 }
 
