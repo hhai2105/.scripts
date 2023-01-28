@@ -40,7 +40,7 @@ run mpd &
 run blueman-applet &
 run /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run udiskie &
-run picom -b&
+run picom --experimental-backend -b&
 run sudo battery-stats-collector &
 run $HOME/.scripts/system/l5p_kbl.py static ff0000 00ff00 0000ff ffffff --brightness 2 &
 run blueberry-tray &
