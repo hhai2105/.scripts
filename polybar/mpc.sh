@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 set -euo pipefail
 
 #--------variables--------
@@ -26,7 +26,7 @@ volume_step=2
 
 listenSong(){
     # songName="%{F$songName_foreground}$(mpc -f "${format}" current)"
-	: | zscroll  --delay 0.3 --match-command "mpc status" \
+	: | zscroll  --delay 1 --match-command "mpc status" \
 				 --match-text "playing" "--before-text '%{F$songName_foreground}' --after-text '%{F-}'" \
 				 --match-text "paused" "--before-text '%{F$songName_paused_foreground}' --after-text '%{F-}' --scroll 0" \
 				 --update-check true "mpc  -f '${format}' current"
@@ -96,7 +96,7 @@ listenBarVolume(){
 		if [ "$(mpc | wc -l)" = 1 ];
 		then
 			echo ""
-		else;
+		else
 			getBarVolume
 		fi
 		mpc idle 1&>/dev/null
@@ -110,7 +110,7 @@ listenBarElapsed(){
 		then
 			echo ""
 			mpc idle 1&>/dev/null
-		else;
+		else
 			getBarElapsed
 			sleep 3
 			if mpc status | grep paused	1&>/dev/null;
@@ -149,7 +149,7 @@ print(){
     if [ "$(mpc | wc -l)" = 1 ];
     then
 		echo ""
-    else;
+    else
 		getSong;
 		getBarVolume;
 		getBarElapsed;

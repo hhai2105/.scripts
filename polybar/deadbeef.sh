@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 interval=5
 maxVolBeforeAdj=$((100 - interval))
 minVolBeforeAdj=$((0 + interval))
