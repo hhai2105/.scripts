@@ -37,15 +37,17 @@ run emacs --daemon &
 run numlockx on &
 run mpDris2 &
 run mpd &
-run blueman-applet &
+run blueman-tray &
 run /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run udiskie &
-run picom --experimental-backend -b&
+run picom --experimental-backend --transparent-clipping -b&
 run sudo battery-stats-collector &
 run $HOME/.scripts/system/l5p_kbl.py static ff0000 00ff00 0000ff ffffff --brightness 2 &
 run blueberry-tray &
 run openrazer-daemon &
 run dunst &
+run mpv --input-ipc-server=/tmp/mpvsocket &
 $HOME/.config/polybar/launch.sh
 nitrogen --restore
+
 

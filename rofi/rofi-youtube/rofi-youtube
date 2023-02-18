@@ -1,9 +1,88 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-QUERY=$(rofi -dmenu -p "Search")
-VALUE=$(~/.scripts/rofi/rofi-youtube/scraper.js $QUERY)
-NAME=$(echo $VALUE | cut -d " " -f 2- | rofi -dmenu -p "Video")
-ID=$(echo $VALUE | grep -F "$NAME" | cut -d " " -f 1)
+BOOKMARKFILE="$HOME/.config/rofi-youtube/bookmark"
 
-mpv --script-opts=ytdl_hook-ytdl_path=yt-dlp "https://youtube.com/watch?v=$ID"
+source $BOOKMARKFILE
+
+genList(){
+    LIST="$BOOKMARK"
+}
+
+search(){
+	QUERY=$(rofi -dmenu -p "Search")
+	VALUE=$(~/.scripts/rofi/rofi-youtube/scraper.js $QUERY)
+	NAME=$(echo $VALUE | cut -d " " -f 2- | rofi -dmenu -p "Video")
+	ID=$(echo $VALUE | grep -F "$NAME" | cut -d " " -f 1)
+	mpv --script-opts=ytdl_hook-ytdl_path=yt-dlp "https://youtube.com/watch?v=$ID"
+}
+
+searchbookmark(){
+    genList;
+    SEARCH=$(echo "$LIST" | rofi -dmenu -p "Search" | sed 's/ *$//g');
+	if echo $BOOKMARK | grep "$SEARCH";
+	then
+		URL=$(echo "$SEARCH" | grep -Po " \K.*");
+		mpv --script-opts=ytdl_hook-ytdl_path=yt-dlp $URL
+	fi
+}
+
+addbookmark(){
+    VALUE=$(rofi -dmenu -p "bookmark: 'shortcut' 'link'")
+    while [ $(echo "$VALUE" | wc -w) -le 1 ];
+    do
+		VALUE=$(rofi -dmenu -p "invalid: 'shortcut' 'link'")
+    done
+
+	CURRENT=$(cat $BOOKMARKFILE | head -n -1 | tail -n +2)
+	echo 'BOOKMARK="\' > $BOOKMARKFILE
+	if [ $(echo "$CURRENT" | wc -l) = 0 ];
+	then
+		echo "$VALUE\n" >> $BOOKMARKFILE
+	else
+		CURRENT=$(echo "$CURRENT\n$VALUE" | sort)
+		echo $CURRENT >> $BOOKMARKFILE
+	fi
+	echo '"' >> $BOOKMARKFILE
+}
+
+deletebookmark(){
+    MARK=$(cat $BOOKMARKFILE | head -n -1 | tail -n +2)
+    VALUE=$(echo "$MARK" | rofi -dmenu -p "bookmark")
+    NEWLIST=$(grep -v "$VALUE"  $BOOKMARKFILE)
+	echo "$NEWLIST" > $BOOKMARKFILE
+}
+
+bookmark(){
+    OPTION=$(echo "search\nadd\ndelete" | rofi -dmenu -p "Options")
+    case $OPTION in
+		search)
+			searchbookmark	
+			;;
+		add)
+			addbookmark	
+			;;
+		delete)
+			deletebookmark	
+			;;
+    esac
+}
+
+search(){
+	QUERY=$(rofi -dmenu -p "Search")
+	VALUE=$(~/.scripts/rofi/rofi-youtube/scraper.js $QUERY)
+	NAME=$(echo $VALUE | cut -d " " -f 2- | rofi -dmenu -p "Video")
+	ID=$(echo $VALUE | grep -F "$NAME" | cut -d " " -f 1)
+	mpv --script-opts=ytdl_hook-ytdl_path=yt-dlp "https://youtube.com/watch?v=$ID"
+}
+
+OPTION=$(echo "search\nbookmark" | rofi -dmenu -p "Options")
+
+case $OPTION in
+    search)
+		search
+		;;
+    bookmark)
+		bookmark	
+		;;
+esac
