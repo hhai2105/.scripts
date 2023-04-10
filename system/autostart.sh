@@ -40,14 +40,14 @@ run mpd &
 run blueman-tray &
 run /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run udiskie &
-run picom --experimental-backend --transparent-clipping -b&
+run picom --experimental-backend -b&
 run sudo battery-stats-collector &
-run $HOME/.scripts/system/l5p_kbl.py static ff0000 00ff00 0000ff ffffff --brightness 2 &
+run $HOME/.scripts/system/l5p_kbl.py static 000000 000000 000000 000000 --brightness 2 &
 run blueberry-tray &
 run openrazer-daemon &
 run dunst &
 run mpv --input-ipc-server=/tmp/mpvsocket &
-$HOME/.config/polybar/launch.sh
+run mailspring -b &
+~/.config/polybar/launch.sh &
+redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | jq -r '"\(.location.lat):\(.location.lng)"') &
 nitrogen --restore
-
-
