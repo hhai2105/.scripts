@@ -25,13 +25,16 @@ optimus-manager-qt &
 #change your keyboard if you need it
 #setxkbmap -layout be
 
+xset r rate 450 25
+
 #cursor active at boot
-#run picom &
+run mouseless &
+run powerkit &
 run imwheel &
+run ./key_repeat.sh &
 run syncthing --no-browser &
 run xsetroot -cursor_name left_ptr &
 run optimus-manager-qt &
-run xfce4-power-manager &
 run ibus-daemon -d &
 run emacs --daemon &
 run numlockx on &
@@ -42,12 +45,11 @@ run /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run udiskie &
 run picom --experimental-backend -b&
 run sudo battery-stats-collector &
-run $HOME/.scripts/system/l5p_kbl.py static 000000 000000 000000 000000 --brightness 2 &
+run $HOME/.scripts/system/l5p_kbl.py static 111111 111111 111111 111111 --brightness 1 &
 run blueberry-tray &
 run openrazer-daemon &
 run dunst &
 run mpv --input-ipc-server=/tmp/mpvsocket &
 run mailspring -b &
-~/.config/polybar/launch.sh &
-redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | jq -r '"\(.location.lat):\(.location.lng)"') &
+run $XDG_CONFIG_HOME/polybar/launch.sh &
 nitrogen --restore

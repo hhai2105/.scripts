@@ -5,7 +5,7 @@
 osd='no'
 inc='1'
 capvol='no'
-maxvol='100'
+maxvol='150'
 autosync='no'
 
 # Muted status
@@ -19,7 +19,7 @@ reloadSink() {
 }
 
 function volUp {
-
+	volMute unmute
     getCurVol
 
     if [ "$capvol" = 'yes' ]

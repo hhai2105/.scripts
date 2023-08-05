@@ -48,7 +48,6 @@ search(){
 	    URL=$(echo $ENGINE | sed "s/{}/$SEARCH/g")
 	    $BROWSER $URL;
 	fi
-
     fi
 }
 
