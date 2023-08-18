@@ -28,7 +28,6 @@ optimus-manager-qt &
 xset r rate 450 25
 
 #cursor active at boot
-run mouseless &
 run powerkit &
 run imwheel &
 run ./key_repeat.sh &
