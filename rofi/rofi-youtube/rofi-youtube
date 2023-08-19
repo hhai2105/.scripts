@@ -64,7 +64,7 @@ search(){
 	QUERY=$(rofi -dmenu -p "Search")
 	VALUE=$(~/.scripts/rofi/rofi-youtube/scraper.js $QUERY)
 	NAME=$(echo $VALUE | cut -d " " -f 2- | rofi -theme rofi-yt -dmenu -p "Video")
-	ID=$(echo $VALUE | grep -F "$NAME" | cut -d " " -f 1)
+	ID=$(echo $VALUE | grep -aF "$NAME" | cut -d " " -f 1)
 	mpv --script-opts=ytdl_hook-ytdl_path=yt-dlp "https://youtube.com/watch?v=$ID"
 }
 
