@@ -51,4 +51,4 @@ run dunst &
 run mpv --input-ipc-server=/tmp/mpvsocket &
 run mailspring -b &
 run $XDG_CONFIG_HOME/polybar/launch.sh &
-nitrogen --restore
+run $HOME/.scripts/system/dynamic-wallpaper.sh &
