@@ -42,13 +42,13 @@ run mpd &
 run blueman-tray &
 run /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run udiskie &
-run picom --experimental-backend -b&
+run picom &
 run sudo battery-stats-collector &
 run $HOME/.scripts/system/l5p_kbl.py static 111111 111111 111111 111111 --brightness 1 &
 run blueberry-tray &
 run openrazer-daemon &
 run dunst &
 run mpv --input-ipc-server=/tmp/mpvsocket &
-run mailspring -b &
+run mailspring -b --password-store=gnome-libsecret&
 run $XDG_CONFIG_HOME/polybar/launch.sh &
 run $HOME/.scripts/system/dynamic-wallpaper.sh &
