@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-BROWSER="google-chrome-stable"
+BROWSER="brave"
 LIST=""
 SEARCHENGINEFILE="$HOME/.config/rofi-search/searchengine"
 QUICKMARKFILE="$HOME/.config/rofi-search/quickmark"
