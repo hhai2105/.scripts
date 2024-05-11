@@ -28,13 +28,13 @@ optimus-manager-qt &
 xset r rate 450 25
 
 #cursor active at boot
+run ibus-daemon --xim -d -r &
 run powerkit &
 run imwheel &
 run ./key_repeat.sh &
 run syncthing --no-browser &
 run xsetroot -cursor_name left_ptr &
 run optimus-manager-qt &
-run ibus-daemon -d &
 run emacs --daemon &
 run numlockx on &
 run mpDris2 &
