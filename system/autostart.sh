@@ -40,7 +40,7 @@ run numlockx on &
 run mpDris2 &
 run mpd &
 run blueman-tray &
-run /usr/lib/xfce4/notifyd/xfce4-notifyd &
+run xfce4-power-manager &
 run udiskie &
 run picom &
 run sudo battery-stats-collector &
